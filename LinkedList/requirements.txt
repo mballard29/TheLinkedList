@@ -1,8 +1,0 @@
-asgiref==3.2.10
-Django==3.1.2
-pytz==2020.1
-sqlparse==0.4.1
-python3==3.8.2
-pip3==20.2.4
-virtualbox==6.1.16
-sqlite3==3.28.0
