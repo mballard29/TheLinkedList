@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # custom apps
+    'api.apps.ApiConfig',
 
     # 3rd party libraries
 
