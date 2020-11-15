@@ -74,6 +74,7 @@ class Invite(models.Model):
     from_user = models.ForeignKey(User, related_name='from_user', on_delete=models.CASCADE)
     to_user = models.ForeignKey(User, related_name='to_user', on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    confirmed = models.BooleanField(default=False, blank=False, null=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
