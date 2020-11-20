@@ -52,7 +52,7 @@ class Calendar(models.Model):
     ]
     c_name = models.CharField(max_length=50, blank=False, null=False)
     color = models.CharField(max_length=3, choices=COLOR_CHOICES, default='RED', blank=False, null=False)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -3,8 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Profile, Calendar, Event, Invite
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CalendarCreationForm, CalendarUpdateForm, \
-    EventCreationForm, EventUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CalendarCreationForm, CalendarUpdateForm, EventCreationForm, EventUpdateForm
 
 User = get_user_model()
 
