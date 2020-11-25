@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.views.generic.base import View
+
+from .forms import UserRegisterForm
 from .models import Profile, Calendar, Event, Invite
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CalendarCreationForm, CalendarUpdateForm, EventCreationForm, EventUpdateForm
+from .forms import UserUpdateForm, ProfileUpdateForm, CalendarCreationForm, CalendarUpdateForm, EventCreationForm, \
+    EventUpdateForm
 
 User = get_user_model()
 
@@ -91,6 +96,45 @@ def search_users(request):
         'users': object_list
     }
     return render(request, "search_users.html", context)
+
+
+class UserFormView(View):
+    form_class = UserRegisterForm
+    template_name = 'register.html'
+
+
+# Displays blank form
+def get(self, request):
+    form = self.form_class(None)
+    return render(request, self.template_name, {'form': form})
+
+
+# process login request
+def post(self, request):
+    form = self.form_class(request.POST)
+
+    if form.is_valid():
+            #doesnt save into database yet
+
+            user = form.save(commit=False)
+
+            #cleaned data
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+
+            user.set_password(password)
+            user.save();
+
+            user = authenticate(username=username, password=password)
+
+                if user is not None:
+                    if user.is_active:
+                            login(request,user)
+                            return redirect('profile.html')
+
+
+         #   return render(request, self.template_name, {'form': form} )
+
 
 
 '''
