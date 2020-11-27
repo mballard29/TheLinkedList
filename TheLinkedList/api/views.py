@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -92,6 +93,55 @@ def search_users(request):
     }
     return render(request, "search_users.html", context)
 
+
+'''
+testing event requests
+
+
+@login_required
+def send_event_invite(request, id):
+    # puts event invite into Invite table
+    # send invite to user with user.id = id
+    to_user = get_object_or_404(User, id=id)
+    evinvite, created = Invite.objects.get_or_create(
+        from_user=request.user,
+        to_user=to_user,
+        event=request.event,
+    )
+    return HttpResponseRedirect('/users/{}'.format(to_user.profile.slug))
+
+@login_required
+def accept_event_invite(request, id):
+    # removes event invite from Invite table
+    # adds to_user to event.invited
+    from_user = get_object_or_404(User, id=id)
+    evinvite = Invite.objects.filter(from_user=from_user, to_user=request.user).first()
+    from_user = get_object_or_404(User, id=id)
+    evinvite = Invite.objects.filter(from_user=from_user, to_user=request.user).first()
+    event = Event.object.filter(id=evinvite.event.id)
+    event.invited.add(evinvite.to_user.profile)
+
+    evinvite.delete()
+    return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
+
+
+@login_required
+def reject_event_invite(request, id):
+    from_user = get_object_or_404(User, id=id)
+    evinvite = Invite.objects.filter(from_user=from_user, to_user=request.user).first()
+    evinvite.delete()
+    return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
+
+
+@login_required
+def cancel_friend_request(request, id):
+    user = get_object_or_404(User, id=id)
+    evinvite = Invite.objects.filter(from_user=request.user, to_user=user).first()
+    evinvite.delete()
+    return HttpResponseRedirect('/users/{}'.format(user.profile.slug))
+    
+    
+'''
 
 '''
 add later
