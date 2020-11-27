@@ -123,14 +123,14 @@ def post(self, request):
             password = form.cleaned_data['password1']
 
             user.set_password(password)
-            user.save();
+            user.save()
 
             user = authenticate(username=username, password=password)
 
-                if user is not None:
-                    if user.is_active:
-                            login(request,user)
-                            return redirect('profile.html')
+            if user is not None:
+                if user.is_active:
+                        login(request,user)
+                        return redirect('profile.html')
 
 
          #   return render(request, self.template_name, {'form': form} )

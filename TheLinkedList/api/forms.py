@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Calendar, Event #, Invite
+from .models import Profile, Calendar, Event  # , Invite
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -8,6 +8,7 @@ class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
         model = User
         fields = ['username', 'first_name', 'email', 'password1', 'password2']
@@ -54,6 +55,5 @@ class EventUpdateForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ['e_name', 'location', 'startTime', 'endTime', 'description']
-
 
 # no InviteCreationForm or InviteDeletionForm yet since this should be managed with the event forms
