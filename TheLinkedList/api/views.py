@@ -114,27 +114,28 @@ def post(self, request):
     form = self.form_class(request.POST)
 
     if form.is_valid():
-            #doesnt save into database yet
+        # doesnt save into database yet
 
-            user = form.save(commit=False)
+        user = form.save(commit=False)
 
-            #cleaned data
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
+        # cleaned data
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password1']
 
-            user.set_password(password)
-            user.save()
+        user.set_password(password)
+        user.save()
 
-            user = authenticate(username=username, password=password)
+        user = authenticate(username=username, password=password)
 
-            if user is not None:
-                if user.is_active:
-                        login(request,user)
-                        return redirect('profile.html')
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('profile.html')
+
+    #   return render(request, self.template_name, {'form': form} )
 
 
-         #   return render(request, self.template_name, {'form': form} )
-#testing
+# testing
 
 
 '''
