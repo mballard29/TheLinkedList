@@ -13,7 +13,7 @@ class Profile(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(default='default.png', upload_to='profile_pic', blank=True, null=False)
     slug = AutoSlugField(populate_from='user')
-    follows = models.ManyToManyField('self', blank=True, null=True)
+    follows = models.ManyToManyField('self', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -69,7 +69,7 @@ class Event(models.Model):
     # who created this event
     belongs_to = models.ForeignKey(Calendar, on_delete=models.CASCADE, blank=False, null=False)
     # who is invited to this event
-    invited = models.ManyToManyField(Profile, blank=True, null=True)
+    invited = models.ManyToManyField(Profile, blank=True)
     description = models.CharField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
