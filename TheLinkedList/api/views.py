@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import User, Event
-from .forms import UserForm, EventForm
-from django.shortcuts import redirect
+from .forms import UserForm, EventForm, UserSearchForm, EventSearchForm, JoinSearchForm, AggregateSearchForm
+from django.template import RequestContext
 # from django.http import HttpResponseRedirect
 # from django.shortcuts import render, redirect, get_object_or_404
 # from django.contrib.auth import get_user_model
@@ -90,6 +90,49 @@ def event_remove(request, pk):
     event = get_object_or_404(Event, pk=pk)
     event.delete()
     return redirect('user_list')
+
+# Query Functions
+
+def search_user(request):
+    user = ""
+    users = ""
+    form = UserSearchForm(request.POST)
+    if form.is_valid():
+        user = form.cleaned_data['username']
+        users = User.objects.filter(username=user)
+    return render(request, "api/user_search_form.html", {'form': form, 'user': user, 'users' : users})
+
+def search_event(request):
+    events = ""
+    form = EventSearchForm(request.POST)
+    if form.is_valid():
+        event = form.cleaned_data['event_name']
+        events = Event.objects.filter(event_name=event)
+    return render(request, "api/event_search_form.html", {'form': form, 'events' : events})
+
+def search_event_by_user(request):
+    user = ""
+    events = ""
+    form = JoinSearchForm(request.POST)
+    if form.is_valid():
+        user_name = form.cleaned_data['username']
+        user = User.objects.get(username = user_name)
+        events = Event.objects.filter(event_name=user.event)
+    return render(request, "api/join_search_form.html", {'form': form, 'events' : events})
+
+def count_users_attending_event(request):
+    event_name = ""
+    users = ""
+    num = 0
+    form = AggregateSearchForm(request.POST)
+    if form.is_valid():
+        event_name = form.cleaned_data['event_name']
+        users = User.objects.filter(event=event_name)
+        for i in users:
+            num = num + 1
+    return render(request, "api/aggregate_search_form.html", {'form': form, 'event_name': event_name, 'users' : users, 'num': num})
+
+
 
 # def register(request):
 #     if request.method == 'POST':

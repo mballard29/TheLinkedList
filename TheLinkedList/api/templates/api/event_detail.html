@@ -4,7 +4,7 @@
     <div class="user">
         Edit Event <a class="btn btn-default" href="{% url 'event_edit' pk=event.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
         Delete Event<a class="btn btn-default" href="{% url 'event_remove' pk=event.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
-        <h2>Event: {{ event.e_name }}</h2>
+        <h2>Event: {{ event.event_name }}</h2>
         <p>Location: {{ event.location|linebreaksbr }}</p>
         <p>Start Time: {{ event.startTime|linebreaksbr }}</p>
         <p>End Time: {{ event.endTime|linebreaksbr }}</p>

@@ -6,14 +6,14 @@ from django.utils import timezone
 class User(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
-    # event = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    event = models.CharField(default="",max_length=20)
 
     def __str__(self):
         return self.username
 
 
 class Event(models.Model):
-    e_name = models.CharField(max_length=20)
+    event_name = models.CharField(max_length=20)
     location = models.CharField(max_length=50, default="")
     startTime = models.DateTimeField(default = timezone.now,blank=False, null=False)
     endTime = models.DateTimeField(default = timezone.now,blank=False, null=False)
@@ -25,7 +25,6 @@ class Event(models.Model):
 
     def __str__(self):
         return self.e_name
-
 
 # class Invite(models.Model):
 #     from_user = models.ForeignKey(User, related_name='from_user', on_delete=models.CASCADE)

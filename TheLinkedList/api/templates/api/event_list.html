@@ -3,7 +3,7 @@
 {% block content %}
 	{% for event in events %}
 	<div class="user">
-	    <h2><a href="{% url 'event_detail' pk=event.pk %}">{{ event.e_name }}</a></h2>
+	    <h2><a href="{% url 'event_detail' pk=event.pk %}">{{ event.event_name }}</a></h2>
 	    <p>{{ event.location|linebreaksbr }}</p>
 	</div>
 	<div class="divider py-1 bg-dark"><hr></div>

@@ -1,0 +1,17 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+    <h2>Search for an event by user </h2>
+    <form method="POST" class="form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+    {% for event in events %}
+	<div class="user">
+	    <h2><a href="{% url 'event_detail' pk=event.pk %}">{{ event.event_name }}</a></h2>
+        <p>Location: {{ event.location|linebreaksbr }}</p>
+	</div>
+	{% endfor %}
+
+{% endblock %}
