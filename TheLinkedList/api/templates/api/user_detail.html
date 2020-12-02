@@ -1,0 +1,10 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+    <div class="user">
+        Edit User <a class="btn btn-default" href="{% url 'user_edit' pk=user.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        Delete User<a class="btn btn-default" href="{% url 'user_remove' pk=user.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <h2>Username: {{ user.username }}</h2>
+        <p>Password: {{ user.password|linebreaksbr }}</p>
+    </div>
+{% endblock %}
