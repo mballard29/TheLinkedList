@@ -1,0 +1,21 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+    <h2>Returns the amount of Users attending an Event </h2>
+    <form method="POST" class="form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+    <div>
+        Amount of users attending {{ event_name }}: {{ num }}
+    </div>
+
+    {% for user in users %}
+	<div class="user">
+	    <h2><a href="{% url 'user_detail' pk=user.pk %}">{{ user.username }}</a></h2>
+        <p>Attending Event: {{ user.event|linebreaksbr }}</p>
+	</div>
+	{% endfor %}
+
+{% endblock %}

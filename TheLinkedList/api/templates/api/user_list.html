@@ -1,0 +1,23 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+	<h2> Users: </h2>
+    <div class="divider py-1 bg-dark"><hr></div>
+	{% for user in users %}
+	<div class="user">
+	    <h2><a href="{% url 'user_detail' pk=user.pk %}">{{ user.username }}</a></h2>
+	    <p>Password: {{ user.password|linebreaksbr }}</p>
+	    <p>Attending Event: {{ user.event|linebreaksbr }}</p>
+	</div>
+	{% endfor %}
+
+	<h2> Events: </h2>
+	<div class="divider py-1 bg-dark"><hr></div>
+	{% for event in events %}
+	<div class="user">
+	    <h2><a href="{% url 'event_detail' pk=event.pk %}">{{ event.event_name }}</a></h2>
+	    <p>Location: {{ event.location|linebreaksbr }}</p>
+	</div>
+	<div class="divider py-1 bg-dark"><hr></div>
+	{% endfor %}
+{% endblock%}

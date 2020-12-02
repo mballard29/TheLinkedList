@@ -1,0 +1,31 @@
+{% load static %}
+<html>
+<head>
+    <title>The Linked List</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/api.css' %}">
+    <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="page-header">
+        <a href="{% url 'user_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Create New User</a>
+        <a href="{% url 'event_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> Create New Event</a>
+        <a href="{% url 'search_user' %}" class="top-menu"><span class="glyphicon glyphicon-search"></span> Search for User</a>
+        <a href="{% url 'search_event' %}" class="top-menu"><span class="glyphicon glyphicon-search"></span> Search for Event</a>
+        <a href="{% url 'search_event_by_user' %}" class="top-menu"><span class="glyphicon glyphicon-search"></span> Search for Event by User</a>
+        <a href="{% url 'count_users_attending_event' %}" class="top-menu"><span class="glyphicon glyphicon-user"></span> Count Users attending an Event</a>
+        <br>
+        <h1><a href="/">The Linked List</a></h1>
+        <h6>By: Mason Ballard, Andres Molina, and Ryan Ratkovich</h6>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

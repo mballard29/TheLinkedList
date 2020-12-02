@@ -1,0 +1,17 @@
+{% extends 'api/base.html' %}
+
+{% block content %}
+    <h2>Search for a user by name</h2>
+    <form method="POST" class="form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+    {% for user in users %}
+	<div class="user">
+	    <h2><a href="{% url 'user_detail' pk=user.pk %}">{{ user.username }}</a></h2>
+	    <p>Password: {{ user.password|linebreaksbr }}</p>
+	</div>
+	{% endfor %}
+
+{% endblock %}
