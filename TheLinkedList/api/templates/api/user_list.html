@@ -6,7 +6,6 @@
 	{% for user in users %}
 	<div class="user">
 	    <h2><a href="{% url 'user_detail' pk=user.pk %}">{{ user.username }}</a></h2>
-	    <p>Password: {{ user.password|linebreaksbr }}</p>
 	    <p>Attending Event: {{ user.event|linebreaksbr }}</p>
 	</div>
 	{% endfor %}
